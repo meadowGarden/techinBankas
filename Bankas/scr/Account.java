@@ -1,15 +1,17 @@
-import ibank.Account;
-
 import java.math.BigDecimal;
-import java.util.ArrayList;
 
-public class MockAccount implements Account {
+public class Account implements ibank.Account {
 
     private String accountNumber;
     private String holderName;
-    private BigDecimal balance;
+    protected BigDecimal balance;
 
-    public MockAccount(String holderName, BigDecimal balance) {
+
+    public Account(String holderName) {
+        this(holderName, BigDecimal.valueOf(0));
+    }
+
+    public Account(String holderName, BigDecimal balance) {
         this.accountNumber = new AccountNumbersList().generateId();
         this.holderName = holderName;
         this.balance = balance;
@@ -46,5 +48,11 @@ public class MockAccount implements Account {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+//        return String.format("%s %s %.2f", accountNumber, holderName, balance);
+        return String.format(this.getClass().getSimpleName() + " -> %s %s %.2f", accountNumber, holderName, balance);
     }
 }

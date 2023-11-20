@@ -1,14 +1,14 @@
 import ibank.Account;
-import ibank.Bank;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class MockBank implements Bank {
+public class TBank implements ibank.Bank {
 
     private ArrayList<Account> accountBook;
 
-    public MockBank() {
+    public TBank() {
         this.accountBook = new ArrayList<>();
     }
 
@@ -33,13 +33,27 @@ public class MockBank implements Bank {
     }
 
     @Override
-    public Account openDebitAccount(String s) {
-        return null;
+    public Account openDebitAccount(String accountHolderName) {
+        for (Account a : accountBook) {
+            if(a.getHolderName().equals(accountHolderName)) {
+                return null;
+            }
+        }
+        Account account = new DebitAccount(accountHolderName);
+        accountBook.add(account);
+        return account;
     }
 
     @Override
-    public Account openCreditAccount(String s, BigDecimal bigDecimal) {
-        return null;
+    public Account openCreditAccount(String accountHolderName, BigDecimal creditLimit) {
+        for (Account a : accountBook) {
+            if(a.getHolderName().equals(accountHolderName)) {
+                return null;
+            }
+        }
+        Account account = new CreditAccount(accountHolderName, creditLimit);
+        accountBook.add(account);
+        return account;
     }
 
     @Override
@@ -63,6 +77,6 @@ public class MockBank implements Bank {
 
     @Override
     public void closeAccount(Account account) {
-
+        accountBook.remove(account);
     }
 }

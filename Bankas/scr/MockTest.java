@@ -6,6 +6,6 @@ public class MockTest extends BaseBankTest {
 
     @Override
     protected Bank createBank() {
-        return new MockBank();
+        return new TBank();
     }
 }
