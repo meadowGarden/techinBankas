@@ -19,12 +19,6 @@ public class AccountNumbersList {
             }
             newID = "LT" + new Random().nextLong(9999);
         }
-
-//        return "LT" + lis
-//        
-
-
-
     }
 
 }
